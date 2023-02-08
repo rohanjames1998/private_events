@@ -1,0 +1,5 @@
+<% if @user.events.any? %>
+  <% @user.events.each do |event| %>
+    <h2><%= event.title %></h2>
+  <% end %>
+<% end %>
