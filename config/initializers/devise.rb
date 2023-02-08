@@ -14,11 +14,10 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '27aaaa88adfaccdb83e71b90fdbe493598b6d8ad222971f725c8550a5c943d0f4d131f049d82fa3b8125b698cea526e42163f84a9955a2c57ff31bdb10235a1a'
+  # config.secret_key = '7631b25364a858ca17e7181b0d1772aa59a6e283e18aafecb41ec5819ceb035d83dcf45e98aaffa5faf2b601fb062c128fcf0678f9c4f3eac2086f510063a7b3'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
-  # config.parent_controller = 'DeviseController'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -126,7 +125,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '863b4b8931f9b4c6c611e11a9c4302b64bc0010b633e664f7d86de93ee0ae6e90751026dd4763257a455b745cc479ce0dc6f87e1758d44b5e18461c77806f9d4'
+  # config.pepper = 'd3246b12f47134dbd11146093342c63b068f89d767fdb0df6af01afcd7d592d3e08fc9e4cf9b3453079067293f840da3bfd0bff77c0b3aa96cd8c616bec50457'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -263,10 +262,9 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
@@ -277,6 +275,7 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
+
   # config.warden do |manager|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
