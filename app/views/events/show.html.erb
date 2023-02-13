@@ -8,6 +8,15 @@
 <p><%= @event.desc %> </p><br />
 <p>Start time: <%= @event.starting_time %></p>
 <p>End Time: <%=@event.ending_time%> </p>
+<% if @event.attendees.any? %>
+  <h2>Confirmed Attendees:</h2>
+  <ul>
+    <% @event.attendees.each do |attendee|%>
+      <li><%= attendee.first_name %> <%=attendee.last_name%> </li>
+    <% end%>
+  </ul>
+<% end %>
+
 <%= button_to "Join Event", invitations_path, params: { invitation: {attendee_id: current_user.id, attended_event_id: @event.id } }, method: :post%>
 
 
