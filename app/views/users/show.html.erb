@@ -21,7 +21,7 @@
   <% end %>
 <h2>Upcoming Events</h2>
     <% if @user.invitations.any? %>
-   <% upcoming_events = @user.attended_events.where(" date > :current_date",
+   <% upcoming_events = @user.attended_events.where(" date >= :current_date",
    { current_date: Date.current }
    )%>
     <% upcoming_events.each do |event| %>
