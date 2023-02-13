@@ -1,5 +1,30 @@
+<h1>
+  Created Events
+</h1>
 <% if @user.events.any? %>
   <% @user.events.each do |event| %>
     <h2><%= event.title %></h2>
   <% end %>
 <% end %>
+
+<h1>
+  Attending Events
+</h1>
+<h2>Past Events</h2>
+  <% if @user.invitations.any? %>
+   <% past_events = @user.attended_events.where(" date < :current_date",
+   { current_date: Date.current }
+   )%>
+    <% past_events.each do |event| %>
+      <p><%= event.title %></p>
+    <% end %>
+  <% end %>
+<h2>Upcoming Events</h2>
+    <% if @user.invitations.any? %>
+   <% upcoming_events = @user.attended_events.where(" date > :current_date",
+   { current_date: Date.current }
+   )%>
+    <% upcoming_events.each do |event| %>
+      <p><%= event.title %></p>
+    <% end %>
+  <% end %>
