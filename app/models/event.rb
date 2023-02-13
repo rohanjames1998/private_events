@@ -11,4 +11,13 @@ class Event < ApplicationRecord
   validates :starting_time, presence: true
   validates :ending_time, presence: true
   validates_associated :creator
+
+  def self.past
+    events = Event.where("date < :current_date", { current_date: Date.current })
+  end
+
+  def self.upcoming
+    events = Event.where("date >= :current_date", {
+      current_date: Date.current })
+  end
 end
