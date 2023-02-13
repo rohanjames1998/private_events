@@ -8,3 +8,7 @@
 <p><%= @event.desc %> </p><br />
 <p>Start time: <%= @event.starting_time %></p>
 <p>End Time: <%=@event.ending_time%> </p>
+<%= button_to "Join Event", invitations_path, params: { invitation: {attendee_id: current_user.id, attended_event_id: @event.id } }, method: :post%>
+
+
+
