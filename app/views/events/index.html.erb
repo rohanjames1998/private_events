@@ -1,9 +1,33 @@
 <h1>
-  Eventer
+  Events
 </h1>
-
-<% if @events.any? %>
-  <% @events.each do |event| %>
-    <li><%= event.title %></li>
-  <% end %>
+<% if user_signed_in? %>
+  <%= link_to  "Log Out", destroy_user_session_path, method: :delete %>
+  <%= link_to "Create Event", new_event_path %>
+<% else %>
+  <%= link_to "Log In", user_session_path %>
 <% end %>
+
+<h1>Upcoming Events</h1>
+<% Event.upcoming.includes(:creator).each do |upcoming_event| %>
+  <h2><%= link_to upcoming_event.title.capitalize, event_path(upcoming_event.id) %></h2>
+  <p>Event Place: <%= upcoming_event.country.capitalize %>, <%= upcoming_event.city.capitalize %> </p>
+  <p>Event Date: <%= upcoming_event.date.strftime("%Y/%-m/%-d") %></p>
+  <p>Host: <%= upcoming_event.creator.first_name.capitalize %> <%= upcoming_event.creator.last_name.capitalize%> </p>
+  <%# <% if upcoming_event.creator.id == current_user.id %>
+    <%# <%= link_to "Edit" & delete %>
+  <p>About: <%= upcoming_event.desc.truncate(50) %></p>
+<% end%>
+
+<h1>Past Events</h1>
+<% Event.past.includes(:creator).each do |past_event| %>
+  <h2><%= link_to past_event.title.capitalize, event_path(past_event.id) %></h2>
+  <p>Event Place: <%= past_event.country.capitalize %>, <%= past_event.city.capitalize %> </p>
+  <p>Event Date: <%= past_event.date.strftime("%Y/%-m/%-d") %></p>
+  <p>Host: <%= past_event.creator.first_name.capitalize %> <%= past_event.creator.last_name.capitalize%> </p>
+  <%# <% if past_event.creator.id == current_user.id %>
+    <%# <%= link_to "Edit" & delete %>
+  <p>About: <%= past_event.desc.truncate(50) %></p>
+<% end%>
+
+
