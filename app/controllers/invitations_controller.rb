@@ -14,6 +14,13 @@ class InvitationsController < ApplicationController
     end
   end
 
+  def destroy
+    invitation = Invitation.find_by(attendee_id: current_user.id, attended_event_id: params[:invitation][:attended_event_id])
+    event = Event.find(params[:invitation][:attended_event_id])
+    invitation.destroy
+    redirect_to event_path(event)
+  end
+
   private
 
   def invitation_params
