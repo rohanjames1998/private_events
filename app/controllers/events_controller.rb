@@ -24,19 +24,25 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
+    @event = current_user.events.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
+    @event = current_user.events.find(params[:id])
 
     if @event.update(event_params)
       redirect_to root_url, notice: "Updated successfully."
     else
       render :edit, status: :unprocessable_entity
-      flash.now[:alert] = "Update unsuccessful"
     end
   end
+
+  def destroy
+    @event = current_user.events.find(params[:id])
+    @event.destroy
+    redirect_to root_url, notice: "Event Successfully Deleted"
+  end
+
 
   private
 
