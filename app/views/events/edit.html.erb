@@ -13,3 +13,15 @@
 
 
 <%= render "form" %>
+
+
+  <div>
+    <h2>Remove Attendees</h2>
+    <% @event.attendees.each do |attendee| %>
+      <p><%= attendee.first_name %> <% attendee.last_name %></p>
+      <%= button_to "Remove", invitation_path, params: { invitation: { attendee_id: attendee.id, attended_event_id: @event.id } }, method: :delete%>
+    <% end %>
+  </div>
+
+
+
