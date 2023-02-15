@@ -3,8 +3,7 @@ class InvitationsController < ApplicationController
 
   def create
 
-    event_id = params[:invitation][:attended_event_id]
-    user = User.find(params[:invitation][:attendee_id])
+    user = User.find(user_id)
     @invitation = user.invitations.build(invitation_params)
 
     if @invitation.save
@@ -17,16 +16,23 @@ class InvitationsController < ApplicationController
   end
 
   def destroy
-    invitation = Invitation.find_by(attendee_id: current_user.id, attended_event_id: params[:invitation][:attended_event_id])
-    event = Event.find(params[:invitation][:attended_event_id])
+    invitation = Invitation.find_by(attendee_id: user_id, attended_event_id: event_id)
     invitation.destroy
-    redirect_to event_path(event)
+    redirect_to event_path(event_id)
   end
 
   private
 
   def invitation_params
     params.require(:invitation).permit(:attendee_id, :attended_event_id)
+  end
+
+  def user_id
+    params[:invitation][:attendee_id]
+  end
+
+  def event_id
+    params[:invitation][:attended_event_id]
   end
 
 end
